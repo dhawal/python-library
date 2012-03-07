@@ -112,7 +112,7 @@ class Airship(object):
             raise AirshipFailure(status, response)
         return status == 201
 
-    def registerAPID(self, APID_token, c2dm_registration_id, alias=None, \
+    def registerAPID(self, APID_token, c2dm_registration_id=None, alias=None, \
         tags=None, badge=None):
         """Register APID token with UA."""
         url = APIDS_TOKEN_URL + APID_token
@@ -183,7 +183,7 @@ class Airship(object):
             payload['aliases'] = aliases
         if tags:
             payload['tags'] = tags
-        if scheduled_for:
+        if schedule_for:
             payload['schedule_for'] = schedule_for
         body = json.dumps(payload)
         status, response = self._request('POST', body, PUSH_URL,
